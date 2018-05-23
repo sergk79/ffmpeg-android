@@ -8,10 +8,13 @@ make clean
 
 case $1 in
   armeabi-v7a | armeabi-v7a-neon)
-    HOST=arm-linux
+    HOST=arm-linux-android
+  ;;
+  arm64-v8a | arm64-v8a-neon)
+    HOST=aarch64-linux-android
   ;;
   x86)
-    HOST=i686-linux
+    HOST=i686-linux-android
   ;;
 esac
 
@@ -22,7 +25,6 @@ echo $CFLAGS
   --sysroot="$NDK_SYSROOT" \
   --host="$HOST" \
   --enable-pic \
-  --disable-asm \
   --enable-static \
   --disable-shared \
   --prefix="${TOOLCHAIN_PREFIX}" \

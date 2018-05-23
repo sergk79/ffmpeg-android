@@ -2,16 +2,19 @@
 
 . abi_settings.sh $1 $2 $3
 
-pushd lame-3.99.5
+pushd lame-3.100
 
 make clean
 
 case $1 in
   armeabi-v7a | armeabi-v7a-neon)
-    HOST=arm-linux
+    HOST=arm-linux-android
   ;;
-  x86)
-    HOST=i686-linux
+  arm64-v8a | arm64-v8a-neon)
+    HOST=aarch64-linux-android
+  ;;
+  x86 | x86_64)
+    HOST=i686-linux-android
   ;;
 esac
 
@@ -20,7 +23,6 @@ esac
   --with-sysroot="$NDK_SYSROOT" \
   --host="$HOST" \
   --enable-static \
-  --disable-shared \
   --prefix="${TOOLCHAIN_PREFIX}" \
   --enable-arm-neon="$ARM_NEON" \
   --disable-shared || exit 1
